@@ -1,33 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using Castle.Windsor.Installer;
 using Contracts;
 using PlugInOne;
 using PlugInTwo;
 
 namespace PlugInViaIoc
 {
-    class Program
+    internal class Program
     {
+        // ensure that the assemblies are copied to the active bin folder
         private SomethingTwo somethingTwo;
         private SomethingOne somethingOne;
 
-        static void Main(string[] args)
+        static void Main()
         {
-            var currDomain = AppDomain.CurrentDomain;
-            //var webAppBinDir = currDomain.RelativeSearchPath;
-            //var assemblyDir = (!string.IsNullOrEmpty(webAppBinDir)) ? webAppBinDir : currDomain.BaseDirectory;
-            var assemblyDir = currDomain.BaseDirectory;
+            var currentDomain = AppDomain.CurrentDomain;
+            var assemblyDir = currentDomain.BaseDirectory;
 
             var container = new WindsorContainer();
-            //container.Install(
-            //    FromAssembly.This(),
-            //    FromAssembly.InDirectory(new AssemblyFilter(assemblyDir)));
             container.Register(Classes.FromAssemblyInDirectory(new AssemblyFilter(assemblyDir)).BasedOn<ISomething>().WithService.AllInterfaces());
             container.Register(Classes.FromAssemblyInDirectory(new AssemblyFilter(assemblyDir)).BasedOn<IFooBar>().WithService.AllInterfaces());
 

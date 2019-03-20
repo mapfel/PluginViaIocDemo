@@ -65,8 +65,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IocTest.cs" />
+    <Compile Include="IocTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResolveMultipleTypes.cs" />
+    <Compile Include="ResolveSingleType.cs" />
+    <Compile Include="ResolveTypeWithDependencies.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
